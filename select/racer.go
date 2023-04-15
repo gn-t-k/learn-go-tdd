@@ -15,8 +15,6 @@ func Racer(a, b string) (winner string) {
 	}
 }
 
-// todo
-
 func ping(url string) chan struct{} {
 	ch := make(chan struct{})
 	go func() {
