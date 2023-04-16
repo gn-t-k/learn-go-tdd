@@ -1,17 +1,25 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"time"
 )
 
-// TODO: 次はここ https://andmorefine.gitbook.io/learn-go-with-tests/go-fundamentals/select#nitesutowoku-1
+var tenSecondTimeout = 10 * time.Second
 
-func Racer(a, b string) (winner string) {
+func Racer(a, b string) (winner string, error error) {
+	return ConfigurableRacer(a, b, tenSecondTimeout)
+}
+
+func ConfigurableRacer(a, b string, timeout time.Duration) (winter string, error error) {
 	select {
 	case <-ping(a):
-		return a
+		return a, nil
 	case <-ping(b):
-		return b
+		return b, nil
+	case <-time.After(timeout):
+		return "", fmt.Errorf("timed out waiting for %s and %s", a, b)
 	}
 }
 
