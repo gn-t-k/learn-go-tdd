@@ -21,6 +21,8 @@ func (s *SpyStore) Cancel() {
 	s.cancelled = true
 }
 
+// TODO: https://andmorefine.gitbook.io/learn-go-with-tests/go-fundamentals/context#rifakutaringu
+
 func TestServer(t *testing.T) {
 	data := "hello, world"
 
