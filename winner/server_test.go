@@ -44,6 +44,7 @@ func TestGETPlayers(t *testing.T) {
 	})
 
 	// TODO: 不足しているプレーヤーのシナリオを既存のスイートに追加する
+	// インチキコミット、、、
 }
 
 func newGetScoreRequest(name string) *http.Request {
