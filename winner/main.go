@@ -17,3 +17,5 @@ func main() {
 	server := &PlayerServer{&InMemoryPlayerStore{}}
 	log.Fatal(http.ListenAndServe(":5000", server))
 }
+
+// TODO: 次は統合テスト
