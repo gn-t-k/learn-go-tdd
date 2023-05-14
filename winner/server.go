@@ -68,12 +68,3 @@ func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
 	p.store.RecordWin(player)
 	w.WriteHeader(http.StatusAccepted)
 }
-
-func (p *PlayerServer) getLeagueTable() []Player {
-	return []Player{
-		{
-			Name: "Chris",
-			Wins: 20,
-		},
-	}
-}
