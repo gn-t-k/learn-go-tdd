@@ -1,21 +1,47 @@
 package main
 
 import (
-	"io"
-	"log"
+	"encoding/json"
+	"os"
 )
 
 type FileSystemPlayerStore struct {
-	database io.ReadSeeker
+	database *json.Encoder
+	league   League
 }
 
-func (f *FileSystemPlayerStore) GetLeague() []Player {
-	f.database.Seek(0, 0)
-	league, err := NewLeague(f.database)
-	if err != nil {
-		// Handle the error here. For example, you might log it and return an empty slice.
-		log.Printf("Error reading league from database: %v", err)
-		return []Player{}
+func NewFileSystemPlayerStore(file *os.File) *FileSystemPlayerStore {
+	file.Seek(0, 0)
+	league, _ := NewLeague(file)
+
+	return &FileSystemPlayerStore{
+		database: json.NewEncoder(&tape{file}),
+		league:   league,
 	}
-	return league
+}
+
+func (f *FileSystemPlayerStore) GetLeague() League {
+	return f.league
+}
+
+func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
+	player := f.league.Find(name)
+
+	if player != nil {
+		return player.Wins
+	}
+
+	return 0
+}
+
+func (f *FileSystemPlayerStore) RecordWin(name string) {
+	player := f.league.Find(name)
+
+	if player != nil {
+		player.Wins++
+	} else {
+		f.league = append(f.league, Player{name, 1})
+	}
+
+	f.database.Encode(f.league)
 }
