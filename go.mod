@@ -1,3 +1,3 @@
-module winner
+module poker
 
 go 1.20
