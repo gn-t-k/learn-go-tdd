@@ -4,7 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"poker"
+
+	"github.com/gn-t-k/learn-go-tdd/poker"
 )
 
 const dbFileName = "game.db.json"
@@ -28,6 +29,3 @@ func main() {
 		log.Fatalf("could not listen on port 5000 %v", err)
 	}
 }
-
-// TODO
-// つぎここ https://andmorefine.gitbook.io/learn-go-with-tests/build-an-application/io#er
