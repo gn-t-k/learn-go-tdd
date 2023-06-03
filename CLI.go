@@ -1,12 +1,14 @@
 package poker
 
+import "io"
+
 type CLI struct {
 	playerStore PlayerStore
+	in          io.Reader
 }
 
 func (cli *CLI) PlayPoler() {
-	cli.playerStore.RecordWin("Cleo")
+	cli.playerStore.RecordWin("Chris")
 }
 
-// TODO: つぎここ
-// https://andmorefine.gitbook.io/learn-go-with-tests/build-an-application/command-line#nitesutowoku-1
+// TODO: https://andmorefine.gitbook.io/learn-go-with-tests/build-an-application/command-line#nitesutowoku-2
